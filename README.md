@@ -2,6 +2,29 @@
 
 This project features the simulation of a custom vehicle with **Ackermann steering capabilities**, developed using **ROS2** and the **Gazebo Sim Harmonic environment**. The model integrates a variety of sensors and navigation tools for autonomous operation, making it one of the first implementations of an Ackermann steering vehicle in this simulation framework.
 
+## Table of Contents
+
+- [Ackermann Steering Vehicle Simulation in ROS2 with Gazebo Sim Harmonic](#ackermann-steering-vehicle-simulation-in-ros2-with-gazebo-sim-harmonic)
+- [Features](#features)
+  - [1 Ackermann Steering](#1-ackermann-steering)
+  - [2 ROS2 Communication](#2-ros2-communication)
+  - [3 Sensors](#3-sensors)
+  - [4 Navigation](#4-navigation)
+  - [5 Manual Control with external joystick](#5-manual-control-with-external-joystick)
+  - [6 Visualization](#6-visualization)
+- [Requirements](#requirements)
+- [Local Installation](#local-installation)
+- [Docker Installation](#docker-installation)
+- [Usage](#usage)
+  - [1 Basic Simulation and Manual Control](#1-basic-simulation-and-manual-control)
+  - [2 SLAM Simultaneous Localization and Mapping](#2-slam-simultaneous-localization-and-mapping)
+  - [3 Navigation with Nav2](#3-navigation-with-nav2)
+- [Future Work](#future-work)
+- [Gallery](#gallery)
+- [TF Tree](#tf-tree)
+- [Star History](#star-history)
+
+
 ## Features
 
 ### 1. **Ackermann Steering**
@@ -146,6 +169,8 @@ You can also run the simulation using Docker, which ensures a consistent environ
 
 > **Note:** The YouTube videos above are played at 4x speed. You can reach the videos by click on the images.
 
+## If you like this project, consider giving it a ⭐ to show your support!
+
 ## Future Work
 
 1. **Deep Reinforcement Learning (DRL):**
@@ -178,5 +203,3 @@ You can also run the simulation using Docker, which ensures a consistent environ
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=alitekes1/ackermann-vehicle-gzsim-ros2&type=Date" />
  </picture>
 </a>
-
-## If you like this project, consider giving it a ⭐ to show your support!
