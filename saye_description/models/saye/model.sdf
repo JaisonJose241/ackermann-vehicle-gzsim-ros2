@@ -61,11 +61,11 @@
 
       <sensor name="imu_sensor" type="imu">
         <always_on>1</always_on>
-        <update_rate>50</update_rate>
+        <update_rate>250</update_rate>
         <!-- <gz_frame_id>saye/base_link</gz_frame_id> -->
         <topic>imu</topic>
         <imu>
-          <enable_orientation>0</enable_orientation>
+          <enable_orientation>1</enable_orientation>
           <angular_velocity>
             <x>
               <noise type="gaussian">
@@ -140,19 +140,20 @@
       </sensor>
       
       <sensor name="gpu_lidar" type="gpu_lidar">
+        <pose>0 0 0.21 0 0 0</pose>
         <lidar>
           <scan>
             <horizontal>
-              <samples>720</samples>
+              <samples>1024</samples>
               <resolution>1</resolution>
               <min_angle>-3.1459</min_angle>
               <max_angle>3.1459</max_angle>
             </horizontal>
             <vertical>
-              <samples>12</samples>
+              <samples>128</samples>
               <resolution>1</resolution>
-              <min_angle>-0.261799</min_angle>
-              <max_angle>0.261799</max_angle>
+              <min_angle>-0.523560209</min_angle>
+              <max_angle>0.523560209</max_angle>
             </vertical>
           </scan>
           <range>
@@ -160,13 +161,18 @@
             <max>50</max>
             <resolution>0.01</resolution>
           </range>
+          <intensity>
+            <min>0</min>
+            <max>65535</max> 
+          </intensity>
           <noise>
             <type>gaussian</type>
             <mean>0</mean>
-            <stddev>0.01</stddev>
+            <stddev>0.00</stddev>
           </noise>
+          <visibility_mask>0xffffffff</visibility_mask>
         </lidar>
-        <gz_frame_id>saye/base_link</gz_frame_id>
+        <gz_frame_id>saye/base_link/gpu_lidar</gz_frame_id>
         <topic>scan</topic>
         <visualize>true</visualize>
         <update_rate>10</update_rate>
