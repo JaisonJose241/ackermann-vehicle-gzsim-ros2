@@ -74,6 +74,12 @@
   gz_type_name: "gz.msgs.Double"
   direction: ROS_TO_GZ
 
+- ros_topic_name: "/saye/pose_array"
+  gz_topic_name: "/world/my_world/pose/info"
+  ros_type_name: "geometry_msgs/msg/PoseArray"
+  gz_type_name: "gz.msgs.Pose_V" # Use "ignition.msgs.Pose_V" if on Fortress
+  direction: GZ_TO_ROS
+
 # - ros_topic_name: "/camera/left_raw"
 #   gz_topic_name: "/camera_left"
 #   ros_type_name: "sensor_msgs/msg/Image"

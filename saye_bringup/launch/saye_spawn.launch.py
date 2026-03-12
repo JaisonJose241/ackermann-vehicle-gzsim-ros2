@@ -64,6 +64,15 @@ def generate_launch_description():
         }],
         output='screen'
     )
+
+    ackermann_controller_node = Node(
+        package='saye_control',
+        executable='lower_level.py', # Ensure this matches your filename
+        name='lower_level_control',
+        output='screen',
+        parameters=[{'use_sim_time': True}]
+    )
+
     gz_spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
@@ -81,6 +90,7 @@ def generate_launch_description():
         DeclareLaunchArgument('rviz', default_value='true',
                               description='Open RViz.'),
         bridge,
+        ackermann_controller_node,
         robot_state_publisher,
         rviz
     ])
