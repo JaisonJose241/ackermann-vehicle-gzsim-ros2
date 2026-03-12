@@ -711,7 +711,7 @@
       </collision>
     </link>
 
-    <plugin
+    <!-- <plugin
       filename="gz-sim-ackermann-steering-system"
       name="gz::sim::systems::AckermannSteering">
       <left_joint>front_left_wheel_joint</left_joint>
@@ -730,7 +730,7 @@
       <min_acceleration>-10</min_acceleration>
       <max_acceleration>10</max_acceleration>
       <topic>/cmd_vel</topic>
-    </plugin>
+    </plugin> -->
 
     <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
       <publish_link_pose>true</publish_link_pose>
@@ -745,6 +745,36 @@
       <odom_topic>odom</odom_topic> 
       <dimensions>3</dimensions>
     </plugin>
+
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>front_left_wheel_steering_joint</joint_name>
+  <topic>/model/saye/steering_left/cmd_pos</topic>
+</plugin>
+
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>front_right_wheel_steering_joint</joint_name>
+  <topic>/model/saye/steering_right/cmd_pos</topic>
+</plugin>
+
+<plugin
+  filename="gz-sim-joint-controller-system"
+  name="gz::sim::systems::JointController">
+  <joint_name>rear_left_wheel_joint</joint_name>
+  <initial_velocity>0.0</initial_velocity>
+  <topic>/model/saye/rear_left/cmd_vel</topic>
+</plugin>
+
+<plugin
+  filename="gz-sim-joint-controller-system"
+  name="gz::sim::systems::JointController">
+  <joint_name>rear_right_wheel_joint</joint_name>
+  <initial_velocity>0.0</initial_velocity>
+  <topic>/model/saye/rear_right/cmd_vel</topic>
+</plugin>
 
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher"></plugin> 
 

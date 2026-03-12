@@ -48,6 +48,32 @@
   gz_type_name: "gz.msgs.PointCloudPacked"
   direction: GZ_TO_ROS
 
+# Right Steering Joint
+- ros_topic_name: "/saye/steering_right"
+  gz_topic_name: "/model/saye/steering_right/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+# Right Drive Joint
+- ros_topic_name: "/saye/drive_right"
+  gz_topic_name: "/model/saye/rear_right/cmd_vel"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+  
+- ros_topic_name: "/saye/steering_left"
+  gz_topic_name: "/model/saye/steering_left/cmd_pos"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
+- ros_topic_name: "/saye/drive_left"
+  gz_topic_name: "/model/saye/rear_left/cmd_vel"
+  ros_type_name: "std_msgs/msg/Float64"
+  gz_type_name: "gz.msgs.Double"
+  direction: ROS_TO_GZ
+
 # - ros_topic_name: "/camera/left_raw"
 #   gz_topic_name: "/camera_left"
 #   ros_type_name: "sensor_msgs/msg/Image"
