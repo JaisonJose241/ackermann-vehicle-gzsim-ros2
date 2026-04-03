@@ -38,7 +38,12 @@ class SayeBaseController(Node):
     def cmd_callback(self, msg):
         """Update internal targets when a new message arrives"""
         self.current_v = msg.linear.x
-        self.current_delta = msg.angular.z
+        self.current_delta_steering_angle = msg.angular.z
+        if abs(self.current_v) > 0.01:
+            self.current_delta = math.atan2(self.current_delta_steering_angle * self.L, self.current_v)
+        else:
+            # If stopped, just use the omega value as a target or keep current
+            self.current_delta = 0.0
 
     def control_loop(self):
         v = self.current_v
