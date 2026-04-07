@@ -12,7 +12,7 @@ class AMCAF_LineFollower(Node):
         # 1. Physical Parameters (Saye-bot)
         self.L = 0.2255  # Wheelbase in meters
         self.target_y = 0.0
-        self.V_nominal = 0.5 # Top speed (m/s)
+        self.V_nominal = 0.2 # Top speed (m/s)
 
         # 2. Control Gains (Calculated from Stability Analysis)
         # Longitudinal (Velocity) Gains
@@ -68,10 +68,9 @@ class AMCAF_LineFollower(Node):
         # 1. V_c: Comfort/Stability (Slow down for sharp turns)
         # As delta approaches max_delta, V_c approaches 0.1
         v_c = self.V_nominal * math.cos(self.kp_y * (self.target_y - curr_y))
-        v_c = max(v_c, 0.1)
+        v_c = max(v_c, 0.01)
 
-        # 2. V_b: Braking (Placeholder for Interns/Camera data)
-        # Logic: V_b = function of distance to obstacle. 
+        # 2. V_b: Braking 
         v_b = self.V_nominal # Assume clear path for now
 
         # Final Target Velocity
