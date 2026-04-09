@@ -20,8 +20,8 @@ class AMCAF_LineFollower(Node):
         self.kd_v = 0.1
         
         # Lateral (Steering) Gains
-        self.kp_y = 1.5    # Pulls robot to y=0
-        self.kp_psi = 2.0  # Aligns robot heading to 0 rad
+        self.kp_y = 3.0 #1.5    # Pulls robot to y=0
+        self.kp_psi = 2.2  # Aligns robot heading to 0 rad
         
         # 3. Physical Constraints (Saturation)
         self.max_a = 0.5      # m/s^2
@@ -46,16 +46,18 @@ class AMCAF_LineFollower(Node):
         return math.atan2(siny_cosp, cosy_cosp)
 
     def control_callback(self, msg):
-        if len(msg.poses) < 3: return
-        
+        # if len(msg.poses) < 3: return
+        if len(msg.poses) < 1: return
+
         # --- A. State Extraction ---
         current_time = self.get_clock().now()
         dt = (current_time - self.last_time).nanoseconds / 1e9
         if dt <= 0.0: return
 
-        curr_x = msg.poses[2].position.x
-        curr_y = msg.poses[2].position.y
-        curr_psi = self.get_yaw_from_quat(msg.poses[2].orientation)
+        curr_x = msg.poses[0].position.x
+        curr_y = msg.poses[0].position.y
+        # print(curr_x)
+        curr_psi = self.get_yaw_from_quat(msg.poses[0].orientation)
 
         # Estimate current velocity (v = ds/dt)
         if self.last_pos_x is None:
@@ -77,7 +79,6 @@ class AMCAF_LineFollower(Node):
         v_s = min(v_c, v_b, self.V_nominal)
 
         # --- C. Control Law Implementation ---
-        
         # 1. Longitudinal Control: Acceleration (a)
         v_error = v_s - v_actual
         v_dot = (v_actual - self.last_v) / dt
@@ -90,14 +91,13 @@ class AMCAF_LineFollower(Node):
         # delta = Kpy(y_err) + Kp_psi(psi_err)
         y_error = self.target_y - curr_y
         psi_error = 0.0 - curr_psi # Target heading is 0 (following X-axis)
-        
+        print(y_error,psi_error)
         steering_delta = (self.kp_y * y_error) + (self.kp_psi * psi_error)
         
         # Clamp steering
         steering_delta = max(min(steering_delta, self.max_delta), -self.max_delta)
 
         # --- D. Integration and Publication ---
-        
         # Integrate acceleration to find the velocity command for the Twist msg
         self.cmd_v += acceleration * dt
         self.cmd_v = max(0.0, self.cmd_v) # No reverse for line following
@@ -105,6 +105,7 @@ class AMCAF_LineFollower(Node):
         cmd = Twist()
         cmd.linear.x = float(self.cmd_v)
         cmd.angular.z = float(steering_delta) # Sent as delta to base controller
+
         self.cmd_pub.publish(cmd)
 
         # Update historical values
